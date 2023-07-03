@@ -1,0 +1,28 @@
+
+
+main{
+    width: 100%;
+    max-width: 1440px;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    background: linear-gradient(89deg, #FFF 0%, #FFF 0.01%, rgba(255, 255, 255, 0.00) 100%);
+    background-image: url(../../assets/heroBg.svg); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+   
+  
+  
+
+}
+
+main::before{
+    content:"";
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    opacity: 0.5;
+    top:0%;
+}
+
