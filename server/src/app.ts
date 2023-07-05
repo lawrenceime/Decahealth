@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
+import userRouter from "./routes/UserRouter";
 
 dotenv.config();
 
@@ -11,6 +12,10 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
+
+
+app.use('/user', userRouter);
 
 
 // Connect to MongoDB
