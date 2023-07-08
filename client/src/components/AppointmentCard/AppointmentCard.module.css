@@ -93,5 +93,10 @@ font-weight: 500;
     border-radius: 15px;
     margin-top: 10px;
     font-weight: 500;
+    cursor: pointer;
 
+}
+.booking:hover{
+    background: #FC724D;
+    color: #fff;
 }

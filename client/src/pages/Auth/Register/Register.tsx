@@ -116,6 +116,7 @@ import "react-toastify/ReactToastify.css"
           name='password'
           value={user.password || ""}
           onChange={handleChange}
+          required
         />
          <label className={Style.label}> Gender:</label><br/>
    
@@ -124,6 +125,7 @@ import "react-toastify/ReactToastify.css"
        name='gender'
        value={user.gender || ""}
        onChange={handleChange}
+       required
      />
         <br/>
         <label className={Style.label}> Age:</label><br/>
@@ -133,6 +135,7 @@ import "react-toastify/ReactToastify.css"
        name='age'
        value={user.age || ""}
        onChange={handleChange}
+       required
      />
       <button  onClick={handleSubmit}  className={Style.registerBtn}>Submit</button>
     </form>
