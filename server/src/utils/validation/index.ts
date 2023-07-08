@@ -1,4 +1,5 @@
 import z from "zod";
+import { loginUser } from "../../controller/UserController";
 
 
 export const UserSchema = z.object({
@@ -36,6 +37,21 @@ export const UserSchema = z.object({
     appointmentInfo: z.string({
          required_error: "Appointment details is required"
     })
+    
 });
-
+ 
+export const loginUserSchema = z.object ({
+    email: z.string({
+        required_error: "Email is required"
+    }).email({
+        message: "The email supplied is not valid"
+    }).nonempty({
+        message: "Email is required"
+    }),
+    password: z.string({
+        required_error: "Password is required"
+    }).nonempty({
+        message: "Password is required"
+    }),
+})
 
