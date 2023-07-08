@@ -38,7 +38,7 @@
 img{
     color:  #252B42;
     font-size: 24px;
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
     line-height: 32px;
@@ -172,7 +172,7 @@ background: #FC724D;
 .Bigtext{
     width: 599px;
    height: 160px;
-   color:  #222;
+   color:  #202B48;
    font-size: 58px;
    font-family: 'Montserrat', sans-serif;
    font-style: normal;
@@ -203,6 +203,7 @@ opacity: 0.7;
    .heroBtn{
     display: flex;
     gap: 10px;
+    z-index: 40;
 
    }
    .join{
@@ -306,6 +307,9 @@ cursor: pointer;
         text-align:start;
         margin:0;
       } 
+      .join{
+        z-index: -40;
+      }
 
     .welcome{
         font-size: 24px;

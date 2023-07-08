@@ -8,7 +8,7 @@ import HeaderCSS from "../components/Header/Header.module.css"
 import Arrow from "../assets/arrow.svg"  
 import {NavLink, Link} from 'react-router-dom' 
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import {useLocation} from  'react-router-dom'; 
+
 
 
 export default function Navbar () {

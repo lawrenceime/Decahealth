@@ -1,0 +1,5 @@
+.container{
+    padding: 50px;
+    background-image: url(../../assets/appointmentHero.svg);
+    height: 100vh;
+}

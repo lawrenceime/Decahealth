@@ -8,6 +8,9 @@ import { Link } from 'react-router-dom';
 import Style from '../Register/Register.module.css'
 import DecaHealth from '../../../assets/DecaHealth.svg'
 import  axios from   "../../../lib/axios"
+// import {z} from "zod"
+import {toast, ToastContainer} from "react-toastify"
+import "react-toastify/ReactToastify.css"
 
 
    
@@ -22,8 +25,12 @@ import  axios from   "../../../lib/axios"
       age : ""
     
     });
+    // const [formError, setError] = useState<z.ZodIssue[]>([])
    
-    const handleSubmit = async (e:any) => {
+    const handleSubmit = async (e: any) => {
+// const validateResult = useValidator.safeParse(user)
+   
+  
       try {
         e.preventDefault()
         const userData = {
@@ -34,20 +41,28 @@ import  axios from   "../../../lib/axios"
            gender : user.gender,
            age : user.age
         };
+       
        const response = await axios.post("/user/signup", userData).then((res:any)=>{
           console.log(res.status, res.data)
+             console.log(res.error)
         })
 
-        navigate("/register/otp")
-       return response
+        // navigate("/register/otp")
         
+       
+        toast.success("Registration Successful", {position: toast.POSITION.TOP_CENTER})
+           
+       return response
+       handleChange(user)
      
-      
+       
         
       }  catch (error) {
         console.log("error")
       }
     }
+
+    
       const handleChange = (event:any) => {
        
         const name:string = event.target.name;
@@ -125,7 +140,7 @@ import  axios from   "../../../lib/axios"
     
      
     <h3  className={Style.alreadyUser}>Are you already a user? <Link to="/login" className={Style.link}> Please login</Link></h3> 
-        
+         <ToastContainer></ToastContainer>
       </section>
      
     </>
