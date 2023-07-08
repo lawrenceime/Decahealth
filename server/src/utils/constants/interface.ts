@@ -1,5 +1,12 @@
 import { Document } from "mongoose";
-export interface IUserModel extends Document {
+export interface IAppointmentModel {
+    doctor: string;
+    hospitalName: string;
+    hospitalAddress: string;
+    purposeOfVisit: string;
+    dateOfAppointment: string;
+}
+export interface IUserModel {
     id: string;
     firstname: string;
     lastname: string;
@@ -7,18 +14,10 @@ export interface IUserModel extends Document {
     password: string;
     gender: string;
     age: number;
-    appointmentInfo: [];
+    appointmentInfo: [IAppointmentModel];
     role: string;
     active: boolean;
     lastActive: string;
     otp: string;
 }
 
-
-export interface IAppointmentModel extends Document {
-    doctor: string;
-    hospitalName: string;
-    hospitalLocation: string;
-    purposeOfVisit: string;
-    dateOfAppointment: string;
-}

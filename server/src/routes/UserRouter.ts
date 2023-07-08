@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { createUser } from "../controller/UserController";
+import { adminUser, createUser } from "../controller/UserController";
 
 
 const router = Router()
 
 router.post('/signup', createUser);
-
+router.post('/signup/admin', adminUser);
 
 
 

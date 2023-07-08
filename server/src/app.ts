@@ -4,6 +4,7 @@ import logger from "morgan";
 import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
 import userRouter from "./routes/UserRouter";
+import appointmentRouter from "./routes/AppointmentRouter";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.use('/user', userRouter);
+app.use('/', appointmentRouter)
 
 
 // Connect to MongoDB
