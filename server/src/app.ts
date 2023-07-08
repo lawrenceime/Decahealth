@@ -4,6 +4,7 @@ import logger from "morgan";
 import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
 import userRouter from "./routes/UserRouter";
+import doctorRouter from "./routes/DoctorRouter"
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.use('/user', userRouter);
-
+app.use('/doctor', doctorRouter);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || '', {
