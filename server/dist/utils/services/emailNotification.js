@@ -46,6 +46,7 @@ const sendAppointment = (params) => __awaiter(void 0, void 0, void 0, function* 
         let info = yield transporter.sendMail({
             from: constant_1.MAIL_SETTINGS.auth.user,
             to: params.to,
+            cc: params.cc,
             subject: "Hello ✔",
             html: `
       <div

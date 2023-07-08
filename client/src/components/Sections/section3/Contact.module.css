@@ -1,0 +1,106 @@
+.container{
+    background: #fff;
+    text-align: center;
+}
+.Wrapper{
+    padding: 160px 0;
+}
+.contactHead{
+    width: 100%;
+    margin-bottom: 80px;
+}
+.header{
+    color: #252B42;
+    text-align: center;
+  
+    font-size: 40px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: 0.2px;  
+}
+@media (max-width:480px){
+    .header{
+        font-size: 20px;
+    }
+}
+.paragraph{
+    color: var(--second-text-color, #737373);
+    text-align: center;
+    /* paragraph */
+    font-size: 14px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.2px; 
+    width: 463px;
+    height: 40px;
+   margin-inline: auto;
+    
+}
+@media (max-width:480px){
+    .paragraph{
+        font-size: 16px;
+        width: 300px;
+        
+        margin-bottom: 40px; 
+    }
+}
+.inputButton{
+    display:flex;
+    align-items:center ; 
+    justify-content: space-between;
+    background:#edeef0 ;
+    /* border-radius: 30px; */
+    padding-left: 20px;
+    margin-bottom: 25px;
+    width:100%;
+    max-width: 688px;
+    margin-inline: auto;
+   
+    
+}
+@media (max-width:480px){
+    .inputInput{
+     width: 300px;
+    }
+}
+.contactInput{
+    flex:1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 10px ;
+    margin: auto 10px;
+}
+
+.inputbtn{
+border: none;
+outline: none;
+padding: 15px 29.5px 15px 30.5px;
+background:  #FC724D;     
+ cursor: pointer;  
+color:  #FFF;
+text-align: center;
+font-size: 14px;
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+line-height: 28px;
+letter-spacing: 0.2px;
+
+   
+}
+.contactInput::placeholder{
+    color:  #737373;
+    font-size: 14px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.2px;  
+     margin-top :-130px;
+   
+}

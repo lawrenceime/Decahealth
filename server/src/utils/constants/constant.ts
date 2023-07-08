@@ -28,6 +28,7 @@ export type MAIL_PARAMS = {
 
 export type APPOINTMENT_PARAMS = {
     to: string;
+    cc: string;
     Appointment: IAppointmentModel;
 
 }

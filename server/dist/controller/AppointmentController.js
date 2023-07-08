@@ -17,14 +17,25 @@ const AppointmentModel_1 = __importDefault(require("../model/AppointmentModel"))
 const validation_1 = require("../utils/validation");
 const emailNotification_1 = require("../utils/services/emailNotification");
 const UserModel_1 = __importDefault(require("../model/UserModel"));
+const DoctorModel_1 = __importDefault(require("../model/DoctorModel"));
+const interface_1 = require("../utils/constants/interface");
 const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { doctor, email, hospitalName, hospitalAddress, purposeOfVisit, dateOfAppointment } = req.body;
+    const { doctor, doctorEmail, email, hospitalName, hospitalAddress, purposeOfVisit, dateOfAppointment } = req.body;
     const user = yield UserModel_1.default.findOne({ email: email });
     if (!user) {
         res.status(400).send({
             status: "error",
             method: req.method,
             message: "invalid user"
+        });
+        return;
+    }
+    const doctorInfo = yield DoctorModel_1.default.findOne({ email: doctorEmail });
+    if (!doctorInfo) {
+        res.status(400).send({
+            status: "error",
+            method: req.method,
+            message: "invalid doctor details"
         });
         return;
     }
@@ -52,6 +63,14 @@ const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, 
     };
     user.appointmentInfo.push(appointmentData);
     yield user.save();
+    if (doctorInfo.appointmentInfo.length <= 5) {
+        doctorInfo.appointmentInfo.push(appointmentData);
+        yield doctorInfo.save();
+        doctorInfo.status = interface_1.Status.available;
+    }
+    else {
+        doctorInfo.status = interface_1.Status.unavailable;
+    }
     const userAppointment = yield AppointmentModel_1.default.create(appointmentData).then(() => {
         return res.status(200).json({
             status: "success",
@@ -71,6 +90,7 @@ const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, 
     try {
         yield (0, emailNotification_1.sendAppointment)({
             to: email,
+            cc: doctorEmail,
             Appointment: appointmentData
         });
         return [true, userAppointment];

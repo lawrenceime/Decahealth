@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+
 export interface IAppointmentModel {
     doctor: string;
     hospitalName: string;
@@ -21,3 +21,18 @@ export interface IUserModel {
     otp: string;
 }
 
+export interface DoctorsModel {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    qualification: string;
+    specialization: string;
+    status: Status;
+    appointmentInfo: [IAppointmentModel]
+}
+
+export enum Status {
+    available = 'available',
+    unavailable = 'unavailable'
+}

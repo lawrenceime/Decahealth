@@ -30,9 +30,6 @@ const UserSchema: Schema = new Schema({
     role: {
         type: String, require: false
     },
-    lastActive: {
-        type: String, require: false
-    },
     active: {
         type: Boolean, require: false
     },

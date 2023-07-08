@@ -36,6 +36,7 @@ export const sendAppointment = async (params: APPOINTMENT_PARAMS) => {
         let info = await transporter.sendMail({
             from: MAIL_SETTINGS.auth.user,
             to: params.to,
+            cc: params.cc,
             subject: "Hello ✔",
             html: `
       <div
