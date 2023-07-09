@@ -17,7 +17,6 @@ export interface IUserModel {
     appointmentInfo: [IAppointmentModel];
     role: string;
     active: boolean;
-    lastActive: string;
     otp: string;
 }
 
@@ -26,6 +25,7 @@ export interface DoctorsModel {
     lastName: string;
     email: string;
     password: string;
+    image: string | Buffer;
     qualification: string;
     specialization: string;
     status: Status;

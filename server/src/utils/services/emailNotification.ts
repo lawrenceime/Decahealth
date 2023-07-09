@@ -46,11 +46,11 @@ export const sendAppointment = async (params: APPOINTMENT_PARAMS) => {
         <h2>Welcome to DECAHEALTH.</h2>
         <h4>You are officially booked your appointment✔</h4>
         <p style="margin-bottom: 30px;">Please, your appointment details below</p>
-        <h3 style="font-size: 40px; letter-spacing: 2px; text-align:center;">${params.Appointment.doctor}</h3><br>
-        <h3 style="font-size: 40px; letter-spacing: 2px; text-align:center;">${params.Appointment.hospitalName}</h3><br>
-        <h3 style="font-size: 40px; letter-spacing: 2px; text-align:center;">${params.Appointment.hospitalAddress}</h3><br>
-        <h3 style="font-size: 40px; letter-spacing: 2px; text-align:center;">${params.Appointment.purposeOfVisit}</h3><br>
-        <h3 style="font-size: 40px; letter-spacing: 2px; text-align:center;">${params.Appointment.dateOfAppointment}</h3><br>
+        <h3 style="font-size: 20px; letter-spacing: 2px; text-align:center;">${params.Appointment.doctor}</h3><br>
+        <h3 style="font-size: 20px; letter-spacing: 2px; text-align:center;">${params.Appointment.hospitalName}</h3><br>
+        <h3 style="font-size: 20px; letter-spacing: 2px; text-align:center;">${params.Appointment.hospitalAddress}</h3><br>
+        <h3 style="font-size: 20px; letter-spacing: 2px; text-align:center;">${params.Appointment.purposeOfVisit}</h3><br>
+        <h3 style="font-size: 20px; letter-spacing: 2px; text-align:center;">${params.Appointment.dateOfAppointment}</h3><br>
    </div>
     `,
         });

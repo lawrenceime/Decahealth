@@ -45,6 +45,9 @@ exports.doctorSchema = new mongoose_1.Schema({
         type: String,
         required: [true, "Password is required"]
     },
+    image: {
+        type: mongoose_1.Schema.Types.Mixed
+    },
     qualification: {
         type: String,
         required: [true, "Qualification is required"]

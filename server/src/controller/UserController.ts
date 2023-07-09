@@ -1,25 +1,25 @@
 import { Request, Response, NextFunction } from "express";
 import User from "../model/UserModel";
-import { ValidateUser } from "../utils/validation";
+import { ValidateUser, validateLogin } from "../utils/validation";
 import { hashPassword, generateOTP } from "../utils/services/service";
 import { sendMail } from "../utils/services/emailNotification";
-
+import bcrypt from "bcrypt";
 
 // creating a new user on the database
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
 
-        const { 
+        const {
             firstname,
             lastname,
             email,
             password,
             gender,
             age
-         } = req.body;
+        } = req.body;
 
-        const validateInput = ValidateUser.safeParse({ 
+        const validateInput = ValidateUser.safeParse({
             firstname,
             lastname,
             email,
@@ -28,10 +28,10 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
             age,
             role: "user",
             active: false
-         })
+        })
 
         if (!validateInput) {
-            res.status(400).send({
+            res.status(400).json({
                 status: "error",
                 method: req.method,
                 message: "invalid input details"
@@ -100,31 +100,31 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
 }
 
 
-
+// admin user
 export const adminUser = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
 
-        const { 
+        const {
             firstname,
             lastname,
             email,
             password,
             gender,
             age
-         } = req.body;
+        } = req.body;
 
-        const validateInput = ValidateUser.safeParse({ 
+        const validateInput = ValidateUser.safeParse({
             firstname,
             lastname,
             email,
             password,
             gender,
             age
-         })
+        })
 
         if (!validateInput) {
-            res.status(400).send({
+            res.status(400).json({
                 status: "error",
                 method: req.method,
                 message: "invalid input details"
@@ -193,6 +193,61 @@ export const adminUser = async (req: Request, res: Response, next: NextFunction)
         console.log(error)
     }
 }
+
+
+//user login
+export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const {
+            email,
+            password
+        } = req.body
+
+        const ValidateUser = validateLogin.safeParse({ email, password })
+
+        if (!ValidateUser) {
+            return res.status(400).json({
+                status: "error",
+                method: req.method,
+                message: "invalid input details"
+            })
+        }
+        const userData = await User.findOne({ email: email })
+
+
+        if (!userData) {
+            return res.status(400).json({
+                status: "error",
+                method: req.method,
+                message: "user does not exist"
+            })
+        }
+        const validatePassword = await bcrypt.compare(password, userData.password);
+        const activeUser = await User.findByIdAndUpdate(userData.id, { $set: { active: true } })
+
+        if (validatePassword) {
+
+            return res.status(200).json({
+                status: "success",
+                method: req.method,
+                message: "login successful",
+                data: activeUser
+            })
+        } else {
+            return res.status(400).json({
+                status: "error",
+                method: req.method,
+                message: "invalid email or passowrd"
+            })
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+
+
 
 
 

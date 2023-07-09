@@ -21,6 +21,9 @@ export const doctorSchema: Schema = new Schema({
     type: String,
     required: [true, "Password is required"]
   },
+  image: {
+    type: Schema.Types.Mixed
+  },
   qualification: {
     type: String,
     required: [true, "Qualification is required"]

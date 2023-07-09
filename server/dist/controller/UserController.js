@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.adminUser = exports.createUser = void 0;
+exports.loginUser = exports.adminUser = exports.createUser = void 0;
 const UserModel_1 = __importDefault(require("../model/UserModel"));
 const validation_1 = require("../utils/validation");
 const service_1 = require("../utils/services/service");
 const emailNotification_1 = require("../utils/services/emailNotification");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 // creating a new user on the database
 const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -32,7 +33,7 @@ const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
             active: false
         });
         if (!validateInput) {
-            res.status(400).send({
+            res.status(400).json({
                 status: "error",
                 method: req.method,
                 message: "invalid input details"
@@ -93,6 +94,7 @@ const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.createUser = createUser;
+// admin user
 const adminUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { firstname, lastname, email, password, gender, age } = req.body;
@@ -105,7 +107,7 @@ const adminUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
             age
         });
         if (!validateInput) {
-            res.status(400).send({
+            res.status(400).json({
                 status: "error",
                 method: req.method,
                 message: "invalid input details"
@@ -168,3 +170,46 @@ const adminUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.adminUser = adminUser;
+//user login
+const loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { email, password } = req.body;
+        const ValidateUser = validation_1.validateLogin.safeParse({ email, password });
+        if (!ValidateUser) {
+            return res.status(400).json({
+                status: "error",
+                method: req.method,
+                message: "invalid input details"
+            });
+        }
+        const userData = yield UserModel_1.default.findOne({ email: email });
+        if (!userData) {
+            return res.status(400).json({
+                status: "error",
+                method: req.method,
+                message: "user does not exist"
+            });
+        }
+        const validatePassword = yield bcrypt_1.default.compare(password, userData.password);
+        const activeUser = yield UserModel_1.default.findByIdAndUpdate(userData.id, { $set: { active: true } });
+        if (validatePassword) {
+            return res.status(200).json({
+                status: "success",
+                method: req.method,
+                message: "login successful",
+                data: activeUser
+            });
+        }
+        else {
+            return res.status(400).json({
+                status: "error",
+                method: req.method,
+                message: "invalid email or passowrd"
+            });
+        }
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
+exports.loginUser = loginUser;

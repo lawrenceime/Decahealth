@@ -20,10 +20,10 @@ const UserModel_1 = __importDefault(require("../model/UserModel"));
 const DoctorModel_1 = __importDefault(require("../model/DoctorModel"));
 const interface_1 = require("../utils/constants/interface");
 const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { doctor, doctorEmail, email, hospitalName, hospitalAddress, purposeOfVisit, dateOfAppointment } = req.body;
-    const user = yield UserModel_1.default.findOne({ email: email });
+    const { doctor, doctorEmail, userEmail, hospitalName, hospitalAddress, purposeOfVisit, dateOfAppointment } = req.body;
+    const user = yield UserModel_1.default.findOne({ email: userEmail });
     if (!user) {
-        res.status(400).send({
+        res.status(400).json({
             status: "error",
             method: req.method,
             message: "invalid user"
@@ -32,7 +32,7 @@ const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, 
     }
     const doctorInfo = yield DoctorModel_1.default.findOne({ email: doctorEmail });
     if (!doctorInfo) {
-        res.status(400).send({
+        res.status(400).json({
             status: "error",
             method: req.method,
             message: "invalid doctor details"
@@ -47,10 +47,19 @@ const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, 
         dateOfAppointment
     });
     if (!validateInput) {
-        res.status(400).send({
+        res.status(400).json({
             status: "error",
             method: req.method,
             message: "invalid input details"
+        });
+        return;
+    }
+    const isExistingAppointment = yield AppointmentModel_1.default.findOne({ email: userEmail });
+    if (!isExistingAppointment) {
+        res.status(400).json({
+            status: "error",
+            method: req.method,
+            message: "created appointment already"
         });
         return;
     }
@@ -65,11 +74,11 @@ const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, 
     yield user.save();
     if (doctorInfo.appointmentInfo.length <= 5) {
         doctorInfo.appointmentInfo.push(appointmentData);
+        yield DoctorModel_1.default.findByIdAndUpdate(doctorInfo.id, { $set: { status: interface_1.Status.available } });
         yield doctorInfo.save();
-        doctorInfo.status = interface_1.Status.available;
     }
     else {
-        doctorInfo.status = interface_1.Status.unavailable;
+        yield DoctorModel_1.default.findByIdAndUpdate(doctorInfo.id, { $set: { status: interface_1.Status.available } });
     }
     const userAppointment = yield AppointmentModel_1.default.create(appointmentData).then(() => {
         return res.status(200).json({
@@ -89,7 +98,7 @@ const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, 
     }
     try {
         yield (0, emailNotification_1.sendAppointment)({
-            to: email,
+            to: userEmail,
             cc: doctorEmail,
             Appointment: appointmentData
         });

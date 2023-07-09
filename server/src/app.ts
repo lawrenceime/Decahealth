@@ -26,7 +26,7 @@ app.use('/', appointmentRouter);
 mongoose.connect(process.env.MONGODB_URI || '', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-} as ConnectOptions) 
+} as ConnectOptions)
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -34,10 +34,10 @@ mongoose.connect(process.env.MONGODB_URI || '', {
     console.log('MongoDB connection error:', error);
   });
 
-  
+
 
 app.listen(process.env.PORT, () => {
-    console.log(`This application is listening at ${process.env.PORT}`)
+  console.log(`This application is listening at ${process.env.PORT}`)
 });
 
 

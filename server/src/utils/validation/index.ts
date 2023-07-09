@@ -3,9 +3,9 @@ import z from "zod";
 
 export const ValidateUser = z.object({
 
-   firstname: z.string({
+    firstname: z.string({
         required_error: "Firstname is required"
-   }).nonempty({
+    }).nonempty({
         message: "Firstname is required"
     }),
     lastname: z.string({
@@ -33,14 +33,29 @@ export const ValidateUser = z.object({
     age: z.number({
         required_error: "Age is required"
     })
+
 });
 
+export const validateLogin = z.object({
+    email: z.string({
+        required_error: "Email is required"
+    }).email({
+        message: "The email supplied is not valid"
+    }).nonempty({
+        message: "Email is required"
+    }),
+    password: z.string({
+        required_error: "Password is required"
+    }).nonempty({
+        message: "Password is required"
+    }),
+})
 
 export const ValidateAppointment = z.object({
 
-   doctor: z.string({
+    doctor: z.string({
         required_error: "doctor is required"
-   }).nonempty({
+    }).nonempty({
         message: "doctor is required"
     }),
     hospitalName: z.string({
