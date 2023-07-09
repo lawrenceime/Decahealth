@@ -4,6 +4,7 @@ import { ZodError } from 'zod';
 import { registerSchema } from '../utils/validation/doctorsValidate';
 import { Error } from 'mongoose';
 import { hashPassword } from '../utils/services/service';
+import { Status } from '../utils/constants/interface';
 
 
 export const getDoctors = async (req: Request, res: Response, next: NextFunction) => {
@@ -84,7 +85,8 @@ export const createDoctors = async (req: Request, res: Response, next: NextFunct
       qualification,
       phoneNumber,
       hospital,
-      address
+      address,
+      status: Status.available
     };
 
     const createdDoctor = await Doctor.create(doctor);

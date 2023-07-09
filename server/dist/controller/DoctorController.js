@@ -18,6 +18,7 @@ const zod_1 = require("zod");
 const doctorsValidate_1 = require("../utils/validation/doctorsValidate");
 const mongoose_1 = require("mongoose");
 const service_1 = require("../utils/services/service");
+const interface_1 = require("../utils/constants/interface");
 const getDoctors = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const allDoctors = yield DoctorModel_1.default.find();
@@ -88,7 +89,8 @@ const createDoctors = (req, res, next) => __awaiter(void 0, void 0, void 0, func
             qualification,
             phoneNumber,
             hospital,
-            address
+            address,
+            status: interface_1.Status.available
         };
         const createdDoctor = yield DoctorModel_1.default.create(doctor);
         return res.status(200).json({

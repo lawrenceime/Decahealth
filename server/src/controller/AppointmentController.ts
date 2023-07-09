@@ -89,7 +89,7 @@ export const createAppointment = async (req: Request, res: Response, next: NextF
         await Doctor.findByIdAndUpdate(doctorInfo.id, { $set: { status: Status.available } })
         await doctorInfo.save();
     } else {
-        await Doctor.findByIdAndUpdate(doctorInfo.id, { $set: { status: Status.available } })
+        await Doctor.findByIdAndUpdate(doctorInfo.id, { $set: { status: Status.unavailable } })
     }
 
 
