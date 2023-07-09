@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { IUserModel } from "../utils/constants/interface";
 import { AppointmentSchema } from "./AppointmentModel";
 
@@ -30,9 +30,6 @@ const UserSchema: Schema = new Schema({
     role: {
         type: String, require: false
     },
-    lastActive: {
-        type: String, require: false
-    },
     active: {
         type: Boolean, require: false
     },
@@ -43,5 +40,5 @@ const UserSchema: Schema = new Schema({
 
 
 
-export default mongoose.model<IUserModel & Document>('User', UserSchema);
+export default mongoose.model<IUserModel>('User', UserSchema);
 

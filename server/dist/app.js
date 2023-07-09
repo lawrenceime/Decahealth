@@ -10,6 +10,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const UserRouter_1 = __importDefault(require("./routes/UserRouter"));
 const DoctorRouter_1 = __importDefault(require("./routes/DoctorRouter"));
+const AppointmentRouter_1 = __importDefault(require("./routes/AppointmentRouter"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, morgan_1.default)('dev'));
@@ -18,6 +19,7 @@ app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use('/user', UserRouter_1.default);
 app.use('/doctor', DoctorRouter_1.default);
+app.use('/', AppointmentRouter_1.default);
 // Connect to MongoDB
 mongoose_1.default.connect(process.env.MONGODB_URI || '', {
     useNewUrlParser: true,

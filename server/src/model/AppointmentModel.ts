@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema} from "mongoose";
 import { IAppointmentModel } from "../utils/constants/interface";
 
 
@@ -12,4 +12,4 @@ export const AppointmentSchema = new Schema({
 });
 
 
-export default mongoose.model<IAppointmentModel & Document>('Appointment', AppointmentSchema);
+export default mongoose.model<IAppointmentModel>('Appointment', AppointmentSchema);

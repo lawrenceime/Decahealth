@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
 import userRouter from "./routes/UserRouter";
 import doctorRouter from "./routes/DoctorRouter"
+import appointmentRouter from "./routes/AppointmentRouter"
 
 dotenv.config();
 
@@ -18,12 +19,14 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/user', userRouter);
 app.use('/doctor', doctorRouter);
+app.use('/', appointmentRouter);
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || '', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-} as ConnectOptions) 
+} as ConnectOptions)
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -31,10 +34,10 @@ mongoose.connect(process.env.MONGODB_URI || '', {
     console.log('MongoDB connection error:', error);
   });
 
-  
+
 
 app.listen(process.env.PORT, () => {
-    console.log(`This application is listening at ${process.env.PORT}`)
+  console.log(`This application is listening at ${process.env.PORT}`)
 });
 
 
