@@ -78,7 +78,7 @@ const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, 
         yield doctorInfo.save();
     }
     else {
-        yield DoctorModel_1.default.findByIdAndUpdate(doctorInfo.id, { $set: { status: interface_1.Status.available } });
+        yield DoctorModel_1.default.findByIdAndUpdate(doctorInfo.id, { $set: { status: interface_1.Status.unavailable } });
     }
     const userAppointment = yield AppointmentModel_1.default.create(appointmentData).then(() => {
         return res.status(200).json({
