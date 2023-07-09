@@ -47,13 +47,13 @@ import "react-toastify/ReactToastify.css"
              console.log(res.error)
         })
 
-        // navigate("/register/otp")
+        navigate("/register/otp")
         
        
         toast.success("Registration Successful", {position: toast.POSITION.TOP_CENTER})
            
        return response
-       handleChange(user)
+      //  handleChange(user)
      
        
         
@@ -75,13 +75,13 @@ import "react-toastify/ReactToastify.css"
     
      return (
       <>
-      <section className={Style.container}>
+      <section className={`${Style.container} ${"animate__animated animate animate__backInRight"}`}>
        <div className={Style.register}>
        <form className={Style.form}>
         <div className={Style.header}><img src={DecaHealth} alt="" /></div>
          <label className={Style.label}>First Name:</label> <br/>
          <input
-         className={Style.input}
+         className={Style.inputReg}
           type="text" 
           name='firstname'
           value={user.firstname || ""}
@@ -96,6 +96,7 @@ import "react-toastify/ReactToastify.css"
           name='lastname'
           value={user.lastname || ""}
           onChange= {handleChange}
+          className={Style.inputReg}
           required
         />
         <br/>
@@ -107,26 +108,34 @@ import "react-toastify/ReactToastify.css"
           name='email'
           value={user.email || ""}
           onChange= {handleChange}
+          className={Style.inputReg}
           required
         /><br/>
       <label className={Style.label}> Password:</label><br/>
    
       <input
-          type="text" 
+          type="password" 
           name='password'
           value={user.password || ""}
           onChange={handleChange}
+          className={Style.inputReg}
           required
         />
          <label className={Style.label}> Gender:</label><br/>
    
-   <input
-       type="text" 
-       name='gender'
-       value={user.gender || ""}
-       onChange={handleChange}
-       required
-     />
+
+     <select 
+      id="gender"
+      value={user.gender}
+     name="gender" 
+     onChange={handleChange}
+     className={Style.select}
+    
+     
+     > <option value="">-- Choose --</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+     </select>
         <br/>
         <label className={Style.label}> Age:</label><br/>
    
@@ -135,6 +144,7 @@ import "react-toastify/ReactToastify.css"
        name='age'
        value={user.age || ""}
        onChange={handleChange}
+       className={Style.inputReg}
        required
      />
       <button  onClick={handleSubmit}  className={Style.registerBtn}>Submit</button>
@@ -142,7 +152,7 @@ import "react-toastify/ReactToastify.css"
        </div>
     
      
-    <h3  className={Style.alreadyUser}>Are you already a user? <Link to="/login" className={Style.link}> Please login</Link></h3> 
+    <h6  className={Style.alreadyUser}>Are you already a user? <Link to="/login" className={Style.link}> Please login</Link></h6> 
          <ToastContainer></ToastContainer>
       </section>
      

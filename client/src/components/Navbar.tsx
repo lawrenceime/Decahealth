@@ -21,7 +21,7 @@ export default function Navbar () {
 
   return (
     <>
-    <div className={HeaderCSS.navContainer}>
+    <div className={`${HeaderCSS.navContainer} ${"animate__animated animate animate__slideInLeft"}`}>
     <Link to ='/'><img className={HeaderCSS.img} src={DecaHealth} alt="DecaHealth Logo" /></Link>  
     <button  onClick={toggleButton} className={HeaderCSS.toggle} > {collapse ?<i className='fas fa-bars'></i> :<i className='fas fa-times'></i> }</button>
    

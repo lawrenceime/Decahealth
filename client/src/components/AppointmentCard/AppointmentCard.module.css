@@ -19,9 +19,11 @@ padding-bottom: 70px;
     }
 }
 .DoctorImg{
-    width: 200px;
+    width: 250px;
     height: 200px;
     margin-inline: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 .card{  
     width: 300px;
