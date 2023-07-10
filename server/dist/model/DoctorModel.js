@@ -25,14 +25,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.doctorSchema = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
+const interface_1 = require("../utils/constants/interface");
+const AppointmentModel_1 = require("./AppointmentModel");
 exports.doctorSchema = new mongoose_1.Schema({
     firstName: {
         type: String,
-        required: [true, "First name is required"],
+        required: [true, "First name is required"]
     },
     lastName: {
         type: String,
-        required: [true, "Last name is required"],
+        required: [true, "Last name is required"]
     },
     email: {
         type: String,
@@ -41,31 +43,37 @@ exports.doctorSchema = new mongoose_1.Schema({
     },
     password: {
         type: String,
-        required: [true, "Password is required"],
+        required: [true, "Password is required"]
+    },
+    image: {
+        type: mongoose_1.Schema.Types.Mixed
     },
     qualification: {
         type: String,
-        required: [true, "Qualification is required"],
+        required: [true, "Qualification is required"]
     },
     specialization: {
         type: String,
-        required: [true, "Specialization is required"],
+        required: [true, "Specialization is required"]
     },
     hospital: {
         type: String,
-        required: [true, "Hospital is required"],
+        required: [true, "Hospital is required"]
     },
     address: {
         type: String,
-        required: [true, "Address is required"],
+        required: [true, "Address is required"]
     },
     phoneNumber: {
         type: String,
-        required: [true, "PhoneNumber is required"],
+        required: [true, "PhoneNumber is required"]
     },
-    role: {
-        type: String,
-        required: [false],
+    status: {
+        type: String, enum: Object.values(interface_1.Status),
+        required: [false]
+    },
+    appointmentInfo: {
+        type: [AppointmentModel_1.AppointmentSchema], require: false
     }
 });
 exports.default = mongoose_1.default.model('Doctor', exports.doctorSchema);

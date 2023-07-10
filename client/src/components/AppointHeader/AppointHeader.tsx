@@ -19,7 +19,7 @@ export default function AppointHeader () {
   return (
      <article className={Appoint.wrapper} >
 
-    <Link to ='/'><img className={Appoint.img} src={DecaHealth} alt="DecaHealth Logo" /></Link> 
+    <Link to ='/'><img className={Appoint.imgHero} src={DecaHealth} alt="DecaHealth Logo" /></Link> 
            
     <button  onClick={toggleButton} className={Appoint.toggle} > {collapse ?<i className='fas fa-bars'></i> :<i className='fas fa-times'></i> }</button>
    

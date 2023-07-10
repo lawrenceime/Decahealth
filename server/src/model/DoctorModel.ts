@@ -1,23 +1,16 @@
 import mongoose, { Schema } from "mongoose";
+import { DoctorsModel, Status } from "../utils/constants/interface";
+import { AppointmentSchema } from "./AppointmentModel";
 
-export interface DoctorsModel {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  qualification: string;
-  specialization: string;
-  role: string;
-}
 
 export const doctorSchema: Schema = new Schema({
   firstName: {
     type: String,
-    required: [true, "First name is required"],
+    required: [true, "First name is required"]
   },
   lastName: {
     type: String,
-    required: [true, "Last name is required"],
+    required: [true, "Last name is required"]
   },
   email: {
     type: String,
@@ -26,32 +19,39 @@ export const doctorSchema: Schema = new Schema({
   },
   password:{
     type: String,
-    required: [true, "Password is required"],
+    required: [true, "Password is required"]
+  },
+  image: {
+    type: Schema.Types.Mixed
   },
   qualification: {
     type: String,
-    required: [true, "Qualification is required"],
+    required: [true, "Qualification is required"]
   },
   specialization: {
     type: String,
-    required: [true, "Specialization is required"],
+    required: [true, "Specialization is required"]
   },
   hospital: {
     type: String,
-    required: [true, "Hospital is required"],
+    required: [true, "Hospital is required"]
   },
   address: {
     type: String,
-    required: [true, "Address is required"],
+    required: [true, "Address is required"]
   },
   phoneNumber: {
     type: String,
-    required: [true, "PhoneNumber is required"],
+    required: [true, "PhoneNumber is required"]
   },
-  role: {
-    type: String,
-    required: [false],
+  status: {
+    type: String, enum: Object.values(Status),
+    required: [false]
+  },
+  appointmentInfo: {
+    type: [AppointmentSchema], require: false
   }
+  
 });
 
 export default mongoose.model<DoctorsModel>('Doctor', doctorSchema);

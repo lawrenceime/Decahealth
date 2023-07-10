@@ -23,14 +23,20 @@
     opacity:0.7
 }
 .modalContainer{
-   width: 50%; 
-   height: 90%;
+   max-width: 700px; 
+   height: auto;
    background: #fff;
    position: relative;
    text-align: center;
    padding: 80px;
    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
    border-radius: 30px;
+}
+@media screen and (max-width:500px){
+    .modalContainer{
+        width:400px;
+        margin-top: 60px;
+    }  
 }
 .toggle{
    font-size: 30px;
@@ -39,7 +45,8 @@
    border: none; 
    position: absolute;
    right: 20px;
-   top:20px
+   top:20px;
+   background: transparent;
         
 }
 .title{
@@ -83,6 +90,15 @@ width: 100%;
     margin-top: 40px;
   text-align: end;
 }
+@media screen and (max-width:500px) {
+   .footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+   } 
+}
 .bookBtn{
     margin-right: 40px;
     padding: 15px 40px;
@@ -94,6 +110,7 @@ width: 100%;
     border: none;
     border-radius: 15px;
 }
+
 .bookBtn:hover{
     background: #fc734dd4;  
 }
@@ -110,7 +127,8 @@ width: 100%;
 }
 .cancelBtn:hover{
     background: #fc734d80;
-    color: #fff;   
+    color: #fff; 
+    margin-right: 70px;  
 }
 
 

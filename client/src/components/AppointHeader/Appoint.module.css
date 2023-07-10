@@ -15,8 +15,20 @@
 
   
 }
+
+.img{
+
+}
+@media screen and (max-width:500px) {
+  .wrapper{
+    display: block;
+    margin-top: -20px;
+  }  
+}
+
 .toggle{
     display: none;
+ 
 }
 
 
@@ -74,7 +86,7 @@ Link{
 
 .joinBtn{
 /* border-radius: 5px; */
-padding: 15px 25px;
+padding: 10px 20px;
 background: #FC724D;
  outline: none;
  border: none;
@@ -82,6 +94,8 @@ background: #FC724D;
  border-top-right-radius: 5px;
  z-index: 40;
  cursor: pointer;
+ margin-top: 70px;
+
 
 }
 .joinBtn:hover{

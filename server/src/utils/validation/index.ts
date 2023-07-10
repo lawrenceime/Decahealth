@@ -1,12 +1,11 @@
 import z from "zod";
-import { loginUser } from "../../controller/UserController";
 
 
-export const UserSchema = z.object({
+export const ValidateUser = z.object({
 
-   firstname: z.string({
+    firstname: z.string({
         required_error: "Firstname is required"
-   }).nonempty({
+    }).nonempty({
         message: "Firstname is required"
     }),
     lastname: z.string({
@@ -33,14 +32,11 @@ export const UserSchema = z.object({
     }),
     age: z.number({
         required_error: "Age is required"
-    }),
-    appointmentInfo: z.string({
-         required_error: "Appointment details is required"
     })
-    
+
 });
- 
-export const loginUserSchema = z.object ({
+
+export const validateLogin = z.object({
     email: z.string({
         required_error: "Email is required"
     }).email({
@@ -54,4 +50,33 @@ export const loginUserSchema = z.object ({
         message: "Password is required"
     }),
 })
+
+export const ValidateAppointment = z.object({
+
+    doctor: z.string({
+        required_error: "doctor is required"
+    }).nonempty({
+        message: "doctor is required"
+    }),
+    hospitalName: z.string({
+        required_error: "hospitalName is required"
+    }).nonempty({
+        message: "hospitalName is required"
+    }),
+    hospitalAddress: z.string({
+        required_error: "hospitalAddress is required"
+    }).nonempty({
+        message: "hospitalAddress is required"
+    }),
+    purposeOfVisit: z.string({
+        required_error: "purposeOfVisit is required"
+    }).nonempty({
+        message: "purposeOfVisit is required"
+    }),
+    dateOfAppointment: z.string({
+        required_error: "dateOfAppointment is required"
+    }).nonempty({
+        message: "dateOfAppointment is required"
+    })
+});
 

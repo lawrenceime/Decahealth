@@ -16,6 +16,7 @@ import "react-toastify/ReactToastify.css"
    
    export default function Register () {
     const navigate = useNavigate()
+    const [error, setError]= useState<any>("")
     const [user, setUser] = useState({ 
       firstname : "", 
       lastname:"",       
@@ -25,11 +26,9 @@ import "react-toastify/ReactToastify.css"
       age : ""
     
     });
-    // const [formError, setError] = useState<z.ZodIssue[]>([])
+   
    
     const handleSubmit = async (e: any) => {
-// const validateResult = useValidator.safeParse(user)
-   
   
       try {
         e.preventDefault()
@@ -44,10 +43,15 @@ import "react-toastify/ReactToastify.css"
        
        const response = await axios.post("/user/signup", userData).then((res:any)=>{
           console.log(res.status, res.data)
-             console.log(res.error)
+          if(res.data.message){
+            setError(res.data.message)
+          }else{
+            setError(res.data)
+          }
+            
         })
 
-        navigate("/register/otp")
+        navigate("/login")
         
        
         toast.success("Registration Successful", {position: toast.POSITION.TOP_CENTER})
@@ -58,7 +62,8 @@ import "react-toastify/ReactToastify.css"
        
         
       }  catch (error) {
-        console.log("error")
+        toast.error("Please enter valid details", {position: toast.POSITION.TOP_CENTER})
+        console.log("error" ,error)
       }
     }
 
@@ -76,8 +81,10 @@ import "react-toastify/ReactToastify.css"
      return (
       <>
       <section className={`${Style.container} ${"animate__animated animate animate__backInRight"}`}>
+       
        <div className={Style.register}>
        <form className={Style.form}>
+       
         <div className={Style.header}><img src={DecaHealth} alt="" /></div>
          <label className={Style.label}>First Name:</label> <br/>
          <input
@@ -148,6 +155,7 @@ import "react-toastify/ReactToastify.css"
        required
      />
       <button  onClick={handleSubmit}  className={Style.registerBtn}>Submit</button>
+      <h5>{error}</h5>
     </form>
        </div>
     

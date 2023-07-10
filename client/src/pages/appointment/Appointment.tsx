@@ -8,7 +8,7 @@
 import AppointHeader from "../../components/AppointHeader/AppointHeader"
 import AppointmentHero from "../../components/AppointHero/AppointHero"
 import AppointmentCard from "../../components/AppointmentCard/AppointmentCard"
-// import Footer from "../../components/Footer/Footer"
+import Footer from "../../components/Footer/Footer"
 import AppointCSS from "../appointment/Appointment.module.css"
 // import {toast, ToastContainer} from "react-toastify"
 // import "react-toastify/ReactToastify.css"
@@ -21,7 +21,7 @@ export default function Appointment () {
        <AppointmentHero/>
        <AppointmentCard/>
        {/* <ToastContainer></ToastContainer> */}
-       {/* <Footer/> */}
+       <Footer/>
      </section>
   );
 }

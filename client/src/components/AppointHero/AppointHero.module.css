@@ -7,6 +7,11 @@
     justify-content: center;
    
    }
+   @media screen and (max-width:500px) {
+    .searchwrapper{
+        margin-top: 30px;
+    }
+   }
    
    .container{
        width: 600px;
@@ -38,6 +43,12 @@
    
     
 }
+@media screen and (max-width:500px) {
+    .inputButton{
+     width:300px;
+     height: 40px;
+    }  
+  }
 .icon{
     width: 20px;
     height: 20px;
@@ -57,6 +68,17 @@
     
        
     }
+    @media screen and (max-width:500px) {
+        .inputbtn{
+         width:100px;
+         font-size: 12px;
+         margin-left: -50px;
+         /* padding: 10px 60px; */
+         height: 40px;
+         
+        }  
+      }
+  
     .contactInput{
         flex:1;
         border: none;
@@ -66,9 +88,29 @@
         margin: auto 10px;
         font-size: 14px;
     }
+    @media  (max-width:500px) {
+        .contactInput{
+        padding-right: -10px;
+        font-size: 12px;
+
+  
+  
+  
+        }  
+      }
     .paragraph{
         color: #000;
         font-family: 'Montserrat'; 
         font-weight: 500; 
         font-size: 24px;
+    }
+    @media  (max-width:500px) {
+      .paragraph{
+        font-size: 24px;
+        width: 400px;
+           padding: 10px 30px;
+
+
+
+      }  
     }

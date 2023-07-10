@@ -17,7 +17,8 @@ import "react-toastify/ReactToastify.css"
    export default function Login() {
 
     const navigate = useNavigate()
-    const [user, setUser] = useState({email : "", password: ""});
+    const[error, setError] = useState("")
+    const [user, setUser] = useState({email : "", password: "", otp: ""});
     const handleChange = (event:any) => {
       const name:string = event.target.name;
       const value = event.target.value;
@@ -28,29 +29,42 @@ import "react-toastify/ReactToastify.css"
       e.preventDefault()
   const userLogin = {
      email : user.email,
-     password : user.password
+     password : user.password,
+     otp : user.otp
   }
       const response = await axios.post("/user/login", userLogin).then((res:any)=>{
-          console.log("Login Successfully", res.data)
+          // console.log("Login Successfully", res.data)
+           console.log(res.data.message)
+          // if(res.data.message){
+          //  setError(res.data.message)        
+          //  }
+          //  else{
+          //   setError(res.data)
+          //  }
           localStorage.setItem("token", res.data.token)
+          
  
       })
-      
      
+      toast.success("Register Successful, Check your mail for Otp", {position: toast.POSITION.TOP_CENTER})
       navigate("/appointment")  
+      
     return response
     
    
     } catch (error:any) {
-      console.log("Login Error")
+      toast.error("Please enter valid details", {position: toast.POSITION.TOP_CENTER})
+      console.log("Login Error", error) 
     }
   }
    
      return (
       <>
       <section className={`${LoginStyle.container} ${"animate__animated animate animate__backInLeft"} `}>
+       
         <div className={LoginStyle.login}>
         <form className={LoginStyle.form}>
+        <h5 className={LoginStyle.error}>{error}</h5>
           <div className={LoginStyle.header}> <img src={DecaHealth} alt="" /></div>
       <label className={LoginStyle.label}>Email:</label>
         <input
@@ -72,6 +86,14 @@ import "react-toastify/ReactToastify.css"
         />
       
       <br/>
+      <input
+         className={LoginStyle.logInput1}
+          type="text" 
+          name='otp'
+          value={user.otp}
+          onChange={handleChange}
+          placeholder='Enter Otp'
+        />
     
  <br/>
       <Link to="" className={LoginStyle.forgetPassLink}><p className={LoginStyle.forgetPass}>Forget password ?</p></Link>

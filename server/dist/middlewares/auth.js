@@ -20,7 +20,7 @@ const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () 
         email
     });
     if (!user) {
-        res.status(400).send({
+        res.status(400).json({
             status: "error",
             method: req.method,
             message: `${email} not found`
@@ -28,14 +28,15 @@ const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () 
         return;
     }
     if (user && user.otp !== otp) {
-        res.status(400).send({
+        res.status(400).json({
             status: "error",
             method: req.method,
             message: `Invalid OTP`
         });
         return;
     }
-    const activeUser = yield UserModel_1.default.findByIdAndUpdate(user.id, { $set: { active: true } });
-    return [true, activeUser];
+    // const activeUser = await User.findByIdAndUpdate(user.id, { $set: { active: true } })
+    // return [true, activeUser]
+    next();
 });
 exports.auth = auth;

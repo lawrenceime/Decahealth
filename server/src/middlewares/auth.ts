@@ -10,7 +10,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     })
 
     if (!user) {
-         res.status(400).send({
+         res.status(400).json({
             status: "error",
             method: req.method,
             message: `${email} not found`
@@ -19,7 +19,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     if (user && user.otp !== otp) {
-        res.status(400).send({
+        res.status(400).json({
             status: "error",
             method: req.method,
             message: `Invalid OTP`
@@ -27,7 +27,9 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
         return; 
     }
     
-    const activeUser = await User.findByIdAndUpdate(user.id, { $set: { active: true } })
+    // const activeUser = await User.findByIdAndUpdate(user.id, { $set: { active: true } })
     
-    return [true, activeUser]
+    // return [true, activeUser]
+
+    next();
 }

@@ -18,7 +18,8 @@ const zod_1 = require("zod");
 const doctorsValidate_1 = require("../utils/validation/doctorsValidate");
 const mongoose_1 = require("mongoose");
 const service_1 = require("../utils/services/service");
-const getDoctors = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const interface_1 = require("../utils/constants/interface");
+const getDoctors = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const allDoctors = yield DoctorModel_1.default.find();
         return res.status(200).json({
@@ -32,13 +33,13 @@ const getDoctors = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getDoctors = getDoctors;
-const getDoctor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getDoctor = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
         const doctor = yield DoctorModel_1.default.findOne({ _id: id });
         console.log(id);
         if (!doctor) {
-            return res.status(404).json({
+            return res.status(400).json({
                 error: 'Doctor not found',
             });
         }
@@ -53,10 +54,21 @@ const getDoctor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getDoctor = getDoctor;
-const createDoctors = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createDoctors = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
     try {
-        const { firstName, lastName, email, password, specialization, qualification, phoneNumber, hospital, address } = req.body;
+        let { firstName, lastName, email, password, qualification, image, specialization, phoneNumber, hospital, address } = req.body;
+        image = (_a = req.file) === null || _a === void 0 ? void 0 : _a.path;
         const validateDoctor = doctorsValidate_1.registerSchema.safeParse({ firstName, lastName, email, password, specialization, qualification, phoneNumber, hospital, address });
+        if (!validateDoctor) {
+            res.status(400).json({
+                status: "error",
+                method: req.method,
+                message: "invalid input details"
+            });
+            return;
+        }
+        console.log("image    ", image);
         const existing = yield DoctorModel_1.default.findOne({ email });
         if (existing) {
             return res.status(400).json({
@@ -64,16 +76,21 @@ const createDoctors = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             });
         }
         const hashedPassword = (0, service_1.hashPassword)(password);
+        console.log('hello');
+        console.log(hashedPassword);
+        console.log("second value    ", image);
         const doctor = {
             firstName,
             lastName,
             email,
             password: hashedPassword,
+            image: (_b = req.file) === null || _b === void 0 ? void 0 : _b.path,
             specialization,
             qualification,
             phoneNumber,
             hospital,
-            address
+            address,
+            status: interface_1.Status.available
         };
         const createdDoctor = yield DoctorModel_1.default.create(doctor);
         return res.status(200).json({

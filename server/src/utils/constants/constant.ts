@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+import { IAppointmentModel } from "./interface";
+
 
 dotenv.config()
 
@@ -22,4 +24,11 @@ export const MAIL_SETTINGS = {
 export type MAIL_PARAMS = {
     to: string,
     OTP: string
+}
+
+export type APPOINTMENT_PARAMS = {
+    to: string;
+    cc: string;
+    Appointment: IAppointmentModel;
+
 }
