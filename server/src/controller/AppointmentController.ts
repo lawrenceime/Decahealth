@@ -61,7 +61,7 @@ export const createAppointment = async (req: Request, res: Response, next: NextF
     }
 
     const isExistingAppointment = await Appointment.findOne({ email: userEmail })
-        if (!isExistingAppointment) {
+        if (isExistingAppointment) {
         res.status(400).json({
             status: "error",
             method: req.method,
@@ -79,15 +79,16 @@ export const createAppointment = async (req: Request, res: Response, next: NextF
     }
 
     user.appointmentInfo.push(appointmentData);
-
     await user.save();
 
 
-    if (doctorInfo.appointmentInfo.length <= 5) {
+    console.log( doctorInfo.appointmentInfo)
+     if (Number(doctorInfo.appointmentInfo.length) <= Number(5)) {
 
-        doctorInfo.appointmentInfo.push(appointmentData);
+    doctorInfo.appointmentInfo.push(appointmentData);
+    await doctorInfo.save();
+       
         await Doctor.findByIdAndUpdate(doctorInfo.id, { $set: { status: Status.available } })
-        await doctorInfo.save();
     } else {
         await Doctor.findByIdAndUpdate(doctorInfo.id, { $set: { status: Status.unavailable } })
     }

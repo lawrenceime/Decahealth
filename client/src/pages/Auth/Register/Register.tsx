@@ -8,11 +8,15 @@ import { Link } from 'react-router-dom';
 import Style from '../Register/Register.module.css'
 import DecaHealth from '../../../assets/DecaHealth.svg'
 import  axios from   "../../../lib/axios"
+// import {z} from "zod"
+import {toast, ToastContainer} from "react-toastify"
+import "react-toastify/ReactToastify.css"
 
 
    
    export default function Register () {
     const navigate = useNavigate()
+    const [error, setError]= useState<any>("")
     const [user, setUser] = useState({ 
       firstname : "", 
       lastname:"",       
@@ -23,7 +27,9 @@ import  axios from   "../../../lib/axios"
     
     });
    
-    const handleSubmit = async (e:any) => {
+   
+    const handleSubmit = async (e: any) => {
+  
       try {
         e.preventDefault()
         const userData = {
@@ -34,20 +40,34 @@ import  axios from   "../../../lib/axios"
            gender : user.gender,
            age : user.age
         };
+       
        const response = await axios.post("/user/signup", userData).then((res:any)=>{
           console.log(res.status, res.data)
+          if(res.data.message){
+            setError(res.data.message)
+          }else{
+            setError(res.data)
+          }
+            
         })
 
-        navigate("/register/otp")
-       return response
+        navigate("/login")
         
+       
+        toast.success("Registration Successful", {position: toast.POSITION.TOP_CENTER})
+           
+       return response
+      //  handleChange(user)
      
-      
+       
         
       }  catch (error) {
-        console.log("error")
+        toast.error("Please enter valid details", {position: toast.POSITION.TOP_CENTER})
+        console.log("error" ,error)
       }
     }
+
+    
       const handleChange = (event:any) => {
        
         const name:string = event.target.name;
@@ -60,13 +80,15 @@ import  axios from   "../../../lib/axios"
     
      return (
       <>
-      <section className={Style.container}>
+      <section className={`${Style.container} ${"animate__animated animate animate__backInRight"}`}>
+       
        <div className={Style.register}>
        <form className={Style.form}>
+       
         <div className={Style.header}><img src={DecaHealth} alt="" /></div>
          <label className={Style.label}>First Name:</label> <br/>
          <input
-         className={Style.input}
+         className={Style.inputReg}
           type="text" 
           name='firstname'
           value={user.firstname || ""}
@@ -81,6 +103,7 @@ import  axios from   "../../../lib/axios"
           name='lastname'
           value={user.lastname || ""}
           onChange= {handleChange}
+          className={Style.inputReg}
           required
         />
         <br/>
@@ -92,24 +115,34 @@ import  axios from   "../../../lib/axios"
           name='email'
           value={user.email || ""}
           onChange= {handleChange}
+          className={Style.inputReg}
           required
         /><br/>
       <label className={Style.label}> Password:</label><br/>
    
       <input
-          type="text" 
+          type="password" 
           name='password'
           value={user.password || ""}
           onChange={handleChange}
+          className={Style.inputReg}
+          required
         />
          <label className={Style.label}> Gender:</label><br/>
    
-   <input
-       type="text" 
-       name='gender'
-       value={user.gender || ""}
-       onChange={handleChange}
-     />
+
+     <select 
+      id="gender"
+      value={user.gender}
+     name="gender" 
+     onChange={handleChange}
+     className={Style.select}
+    
+     
+     > <option value="">-- Choose --</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+     </select>
         <br/>
         <label className={Style.label}> Age:</label><br/>
    
@@ -118,14 +151,17 @@ import  axios from   "../../../lib/axios"
        name='age'
        value={user.age || ""}
        onChange={handleChange}
+       className={Style.inputReg}
+       required
      />
       <button  onClick={handleSubmit}  className={Style.registerBtn}>Submit</button>
+      <h5>{error}</h5>
     </form>
        </div>
     
      
-    <h3  className={Style.alreadyUser}>Are you already a user? <Link to="/login" className={Style.link}> Please login</Link></h3> 
-        
+    <h6  className={Style.alreadyUser}>Are you already a user? <Link to="/login" className={Style.link}> Please login</Link></h6> 
+         <ToastContainer></ToastContainer>
       </section>
      
     </>

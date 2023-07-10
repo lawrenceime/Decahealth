@@ -1,6 +1,18 @@
 .footSection{
     text-align: center;
     background: #FC724D;
+    /* position: fixed;
+    bottom:0;
+    left: 0;
+    width: 100%;
+    z-index: 40; */
+    /* padding-top: 20px;
+    margin-top: 200px; */
+
+
+}
+.logo{
+    margin-top: 20px;
 }
 
 .paragraph{

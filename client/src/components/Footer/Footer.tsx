@@ -12,7 +12,7 @@ const Footer = ()=> {
   return (
    <section className={FooterCss.footSection}>
     <div className={FooterCss.wrapper}>
-       <img src={DecaHealth} alt="Logo" /> 
+       <img src={DecaHealth} alt="Logo"  className={FooterCss.logo}/> 
        <p className={FooterCss.paragraph}>Lorem ipsum dolor sit amet consectetur. Sit ullamcorper proin nullam egestas turpis lectus pretium mi.
          Mattis eget fames interdum hendrerit facilisi.</p>
        <div className={FooterCss.socials}>

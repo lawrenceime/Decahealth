@@ -55,7 +55,7 @@ const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, 
         return;
     }
     const isExistingAppointment = yield AppointmentModel_1.default.findOne({ email: userEmail });
-    if (!isExistingAppointment) {
+    if (isExistingAppointment) {
         res.status(400).json({
             status: "error",
             method: req.method,
@@ -72,10 +72,11 @@ const createAppointment = (req, res, next) => __awaiter(void 0, void 0, void 0, 
     };
     user.appointmentInfo.push(appointmentData);
     yield user.save();
-    if (doctorInfo.appointmentInfo.length <= 5) {
+    console.log(doctorInfo.appointmentInfo);
+    if (Number(doctorInfo.appointmentInfo.length) <= Number(5)) {
         doctorInfo.appointmentInfo.push(appointmentData);
-        yield DoctorModel_1.default.findByIdAndUpdate(doctorInfo.id, { $set: { status: interface_1.Status.available } });
         yield doctorInfo.save();
+        yield DoctorModel_1.default.findByIdAndUpdate(doctorInfo.id, { $set: { status: interface_1.Status.available } });
     }
     else {
         yield DoctorModel_1.default.findByIdAndUpdate(doctorInfo.id, { $set: { status: interface_1.Status.unavailable } });

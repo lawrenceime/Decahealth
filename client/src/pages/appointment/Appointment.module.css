@@ -1,0 +1,13 @@
+.container{
+    padding: 50px;
+    background-image: url(../../assets/appointmentHero.svg);
+    height: 100vh;
+}
+@media screen and (max-width:500px) {
+   .container {
+    background-image: url(../../assets/appointmentHero.svg);
+    background-repeat: no-repeat;
+    background-size: 400px;
+    
+   }
+}

@@ -35,8 +35,8 @@ const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () 
         });
         return;
     }
-    const activeUser = yield UserModel_1.default.findByIdAndUpdate(user.id, { $set: { active: true } });
-    return [true, activeUser];
+    // const activeUser = await User.findByIdAndUpdate(user.id, { $set: { active: true } })
+    // return [true, activeUser]
     next();
 });
 exports.auth = auth;

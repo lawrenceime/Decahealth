@@ -1,0 +1,116 @@
+.searchwrapper{
+    text-align: center;
+    margin-top: 600px ;
+    margin-bottom: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+   }
+   @media screen and (max-width:500px) {
+    .searchwrapper{
+        margin-top: 30px;
+    }
+   }
+   
+   .container{
+       width: 600px;
+       height: 305px;
+       background: #fff;
+       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+       border-radius: 20px;
+       padding-top: 60px;
+ 
+      
+       
+   }
+   .inputButton{
+    display:flex;
+    align-items:center ; 
+    justify-content: space-between;
+    background: rgba(217, 217, 217, 0.92);    
+    color: #000;
+    font-family: 'Montserrat';
+    font-size: 24px;
+    padding-left: 20px;
+    margin-bottom: 25px;
+    width:100%;
+    max-width: 470px;
+     border-radius: 30px;
+    height: 69px;
+    margin-inline: auto;
+    margin-top: 50px;
+   
+    
+}
+@media screen and (max-width:500px) {
+    .inputButton{
+     width:300px;
+     height: 40px;
+    }  
+  }
+.icon{
+    width: 20px;
+    height: 20px;
+}
+.inputbtn{
+    border: none;
+    outline: none;
+    padding: 15px 29.5px 15px 30.5px;
+    background:  #FC724D;     
+     cursor: pointer;  
+     color: #FFF;    
+     font-size: 20px;  
+    font-family: 'Montserrat';   
+    height: 69px;
+    border-radius: 30px;
+    width: 160px;
+    
+       
+    }
+    @media screen and (max-width:500px) {
+        .inputbtn{
+         width:100px;
+         font-size: 12px;
+         margin-left: -50px;
+         /* padding: 10px 60px; */
+         height: 40px;
+         
+        }  
+      }
+  
+    .contactInput{
+        flex:1;
+        border: none;
+        outline: none;
+        background: transparent;
+        padding: 10px ;
+        margin: auto 10px;
+        font-size: 14px;
+    }
+    @media  (max-width:500px) {
+        .contactInput{
+        padding-right: -10px;
+        font-size: 12px;
+
+  
+  
+  
+        }  
+      }
+    .paragraph{
+        color: #000;
+        font-family: 'Montserrat'; 
+        font-weight: 500; 
+        font-size: 24px;
+    }
+    @media  (max-width:500px) {
+      .paragraph{
+        font-size: 24px;
+        width: 400px;
+           padding: 10px 30px;
+
+
+
+      }  
+    }
